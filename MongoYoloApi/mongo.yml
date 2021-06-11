@@ -1,0 +1,24 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+
+  mongo:
+    image: mongo
+    container_name: mongo-robo
+    restart: always
+
+    ports:
+      - 27017:27017
+      - 27018:27018
+      - 27019:27019
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      DB_NAME: robo
+      DB_USER: root
+      DB_PASSWORD: example
+      MONGO_INITDB_DATABASE: robo
+    volumes:
+    - ./mongo-init.js:/docker-entrypoint-initdb.d/init-mongo-js:ro
+    - ./mongo-volume:/database/db
